@@ -1,4 +1,4 @@
-# The Daily Lighthouse — Vulnerable Web App (Instructor Answer Key)
+# The Daily Lighthouse
 
 A deliberately insecure server-side-rendered newspaper (Flask + Jinja2 + SQLite)
 for teaching web vulnerabilities. **Run only on an isolated lab network.**
