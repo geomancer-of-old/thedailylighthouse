@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - The Daily Lighthouse{% endblock %}
+
+{% block content %}
+    <div class="modal-static wide">
+        <div class="modal-content">
+            <h2>Ministry Control Panel</h2>
+            <p class="notice">You reached /admin with no role check. That is the lesson.</p>
+
+            <p class="flag">{{ flag }}</p>
+
+            <table class="user-table">
+                <tr><th>ID</th><th>Username</th><th>Password</th><th>Role</th></tr>
+                {% for u in users %}
+                <tr>
+                    <td>{{ u['id'] }}</td>
+                    <td>{{ u['username'] }}</td>
+                    <td>{{ u['password'] }}</td>
+                    <td>{{ u['role'] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

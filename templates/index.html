@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if featured %}
+    <section class="featured-article">
+        <article>
+            <h2><a href="{{ url_for('article', article_id=featured['id']) }}">{{ featured['title'] }}</a></h2>
+            <div class="meta">Published: October 14, 2026 | By: {{ featured['author'] }}</div>
+            <p>{{ featured['body'][:320] }}{% if featured['body']|length > 320 %}...{% endif %}</p>
+            <a href="{{ url_for('article', article_id=featured['id']) }}" class="read-more">Read Full Report</a>
+        </article>
+    </section>
+    {% endif %}
+
+    <section class="secondary-articles">
+        {% for a in articles %}
+        <article class="card">
+            <h3><a href="{{ url_for('article', article_id=a['id']) }}">{{ a['title'] }}</a></h3>
+            <div class="meta">By: {{ a['author'] }}</div>
+            <p>{{ a['body'][:180] }}{% if a['body']|length > 180 %}...{% endif %}</p>
+            <a href="{{ url_for('article', article_id=a['id']) }}">Read More</a>
+        </article>
+        {% endfor %}
+    </section>
+{% endblock %}

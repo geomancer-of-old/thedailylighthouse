@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article['title'] }} - The Daily Lighthouse{% endblock %}
+
+{% block content %}
+    <section class="featured-article">
+        <article>
+            {% if article['published'] == 0 %}
+            <div class="draft-banner">UNPUBLISHED DRAFT &mdash; internal only</div>
+            {% endif %}
+            <h2>{{ article['title'] }}</h2>
+            <div class="meta">By: {{ article['author'] }} | {{ article['category'] }}</div>
+
+            <!-- VULN - stored/reflected XSS: article body rendered without
+                 escaping. A reporter who saves <script>...</script> as the body
+                 gets it executed in every reader's browser. Remove |safe to fix. -->
+            <div class="article-body">{{ article['body'] | safe }}</div>
+
+            <p><a href="{{ url_for('index') }}" class="read-more">&larr; Back to front page</a></p>
+        </article>
+    </section>
+{% endblock %}

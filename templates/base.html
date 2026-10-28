@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}The Daily Lighthouse - Truth in the Dark{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="logo"><a href="{{ url_for('index') }}">The Daily Lighthouse</a></div>
+            <div class="auth-links">
+                {% if user %}
+                    <span class="whoami">{{ user['username'] }} ({{ user['role'] }})</span>
+                    <!-- Reporter portal link only shown when authenticated, but the
+                         /reporter route itself has no role check (access-control lesson) -->
+                    <a href="{{ url_for('reporter') }}" id="reporterPortal">Reporter Portal (Publish)</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" id="loginBtn">Login / Subscribe</a>
+                    <!-- Hidden reporter portal link that appears when authenticated -->
+                    <a href="{{ url_for('reporter') }}" id="reporterPortal" style="display: none;">Reporter Portal (Publish)</a>
+                {% endif %}
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('index') }}">Leaks & Documents</a></li>
+                <li><a href="{{ url_for('index') }}">Ministry Watch</a></li>
+                <li><a href="{{ url_for('index') }}">Technology</a></li>
+            </ul>
+            <form class="search-container" action="{{ url_for('search') }}" method="get">
+                <input type="text" name="q" id="searchInput" placeholder="Search archives...">
+                <button id="searchBtn" type="submit">Search</button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <nav class="footer-links">
+            <a href="{{ url_for('careers') }}">Careers</a>
+            <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+            <a href="{{ url_for('contact') }}">Contact Us</a>
+            <a href="{{ url_for('about') }}">About</a>
+        </nav>
+        <p>&copy; 2026 The Daily Lighthouse. We will not be silenced.</p>
+        <!-- Dev note: test reporter account is editor / truthseeker99 -->
+    </footer>
+</body>
+</html>

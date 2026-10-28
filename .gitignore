@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+lighthouse.db
+lighthouse.db-wal
+lighthouse.db-shm
+uploads/*
+!uploads/.gitkeep
+venv/
+.venv/
+env/
+.env/
+ENV/

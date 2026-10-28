@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Search - The Daily Lighthouse{% endblock %}
+
+{% block content %}
+    <section class="secondary-articles">
+        <!-- VULN - reflected XSS: the raw query is echoed back with |safe -->
+        <h2>Search results for: {{ q | safe }}</h2>
+
+        {% if error %}
+            <p class="error">Query error: {{ error }}</p>
+        {% endif %}
+
+        {% if results %}
+            {% for r in results %}
+            <article class="card">
+                <h3><a href="{{ url_for('article', article_id=r[0]) }}">{{ r[1] }}</a></h3>
+                <div class="meta">{{ r[2] }} | {{ r[3] }}</div>
+            </article>
+            {% endfor %}
+        {% elif q and not error %}
+            <p>No archives matched your search, citizen.</p>
+        {% endif %}
+    </section>
+{% endblock %}

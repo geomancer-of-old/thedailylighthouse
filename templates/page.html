@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page_title }} - The Daily Lighthouse{% endblock %}
+
+{% block content %}
+    <section class="featured-article">
+        <article>
+            <h2>{{ page_title }}</h2>
+            <p>{{ body }}</p>
+            <p><a href="{{ url_for('index') }}" class="read-more">&larr; Back to front page</a></p>
+        </article>
+    </section>
+{% endblock %}

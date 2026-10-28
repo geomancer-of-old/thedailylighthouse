@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Careers - The Daily Lighthouse{% endblock %}
+
+{% block content %}
+    <section class="featured-article">
+        <article>
+            <h2>Join The Daily Lighthouse</h2>
+            <div class="meta">Open positions at The Daily Lighthouse</div>
+            <p>We are always looking for people willing to keep a light on power. Select a posting
+            below to read more and apply.</p>
+        </article>
+    </section>
+
+    <section class="secondary-articles">
+        {% for id, job in jobs.items() %}
+        <article class="card">
+            <h3><a href="{{ url_for('job', job_id=id) }}">{{ job['title'] }}</a></h3>
+            <div class="meta">{{ job['location'] }} &middot; {{ job['type'] }}</div>
+            <p>{{ job['summary'] }}</p>
+            <a href="{{ url_for('job', job_id=id) }}">View &amp; Apply &rarr;</a>
+        </article>
+        {% endfor %}
+    </section>
+{% endblock %}
